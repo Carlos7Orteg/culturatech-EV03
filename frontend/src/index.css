@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "./estilos.css";
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--c-22, #f9faf5);
+    color: var(--c-8, #1a1c1a);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+}
+
+button, .badge, .mono-font {
+    font-family: 'Geist', ui-monospace, monospace;
+}
