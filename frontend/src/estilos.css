@@ -580,7 +580,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-image: url('../assets/images/login_bogota.png');
+  background-image: url('/assets/images/login_bogota.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1289,7 +1289,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #253b4f;
     background:
         linear-gradient(180deg, rgba(18, 43, 67, .88), rgba(14, 33, 52, .92)),
-        url('<%=request.getContextPath()%>/assets/images/login_bogota.png') center / cover fixed no-repeat;
+        url('/assets/images/login_bogota.png') center / cover fixed no-repeat;
     font-family: 'Inter', sans-serif;
 }
 
