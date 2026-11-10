@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.culturatech</groupId>
-	<artifactId>culturatech-ev01</artifactId>
+	<artifactId>culturatech-EV03</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Culturatech-EV03</name>
 	<description/>

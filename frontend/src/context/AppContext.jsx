@@ -4,6 +4,7 @@
  */
 import { createContext, useContext, useState, useEffect } from 'react';
 import { eventsService } from '../api/events.service';
+import { normalizeEvent } from '../utils/eventNormalizer';
 
 const AppContext = createContext(null);
 
@@ -12,9 +13,13 @@ export function AppProvider( { children }) {
     const [favorites, setFavorites] = useState(() => {
         try {
             const stored = localStorage.getItem('culturatech_favorites');
-            return stored ? JSON.parse(stored) : [];
+            const parsed = stored ? JSON.parse(stored) : [6, 5, 8];
+
+            return Array.isArray(parsed)
+                ? parsed.map(Number).filter(id => Number.isFinite(id) && id > 0)
+                : [6, 5, 8];
         } catch {
-            return [];
+            return [6, 5, 8];
         }
     });
 
@@ -22,7 +27,39 @@ export function AppProvider( { children }) {
     const [agenda, setAgenda] = useState(() => {
         try {
             const stored = localStorage.getItem('culturatech_agenda');
-            return stored ? JSON.parse(stored) : [];
+            const parsed = stored ? JSON.parse(stored) : [];
+
+            if (!Array.isArray(parsed)) return [];
+
+            const today = new Date().toISOString().slice(0, 10);
+
+            return parsed.map(item => {
+                const rawId =
+                    item && typeof item === 'object'
+                        ? item.eventId ?? item.id
+                        : item;
+
+                const id = Number(rawId);
+
+                if (!Number.isFinite(id) || id <= 0) return null;
+
+                if (item && typeof item === 'object') {
+                    return {
+                        ...item,
+                        eventId: id,
+                        addedAt: item.addedAt ?? today,
+                        dateBadge: item.dateBadge ?? 'Programado',
+                        note: item.note ?? ''
+                    };
+                }
+
+                return {
+                    eventId: id,
+                    addedAt: today,
+                    dateBadge: 'Programado',
+                    note: ''
+                };
+            }).filter(Boolean);
         } catch {
             return [];
         }
@@ -66,20 +103,58 @@ export function AppProvider( { children }) {
     useEffect(() => {
         eventsService
                 .getAll()
-                .then((data) => setEvents(Array.isArray(data) ? data : []))
+                .then((data) =>
+                    setEvents(
+                            Array.isArray(data) ? data.map(normalizeEvent) : []
+                    )
+                )
                 .catch(() => setEvents([]));
     }, []);
 
+    const isFavorite = (eventId) =>
+        favorites.some(id => Number(id) === Number(eventId));
+
     const toggleFavorite = (eventId) => {
-        setFavorites((prev) =>
-            prev.includes(eventId) ? prev.filter((id) => id !== eventId) : [...prev, eventId]
+        const id = Number(eventId);
+
+        if (!Number.isFinite(id) || id <= 0) return;
+
+        setFavorites(prev =>
+            prev.some(value => Number(value) === id)
+                ? prev.filter(value => Number(value) !== id)
+                : [...prev, id]
         );
     };
 
+    const isInAgenda = (eventId) =>
+        agenda.some(item => Number(item.eventId) === Number(eventId));
+
     const toggleAgenda = (eventId) => {
-        setAgenda((prev) =>
-            prev.includes(eventId) ? prev.filter((id) => id !== eventId) : [...prev, eventId]
-        );
+        const id = Number(eventId);
+ 
+        if (!Number.isFinite(id) || id <= 0) return;
+
+        setAgenda(prev => {
+            const exists = prev.some(
+                item => Number(item.eventId) === id
+            );
+
+            if (exists) {
+                return prev.filter(
+                    item => Number(item.eventId) !== id
+                );
+            }
+
+            return [
+                ...prev,
+                {
+                    eventId: id,
+                    addedAt: new Date().toISOString().slice(0, 10),
+                    dateBadge: 'Programado',
+                    note: ''
+                }
+            ];
+        });
     };
 
     const unreadNotificationsCount = notifications.filter((n) => !n.read).length;
@@ -91,6 +166,8 @@ export function AppProvider( { children }) {
                                 toggleFavorite,
                                 agenda,
                                 toggleAgenda,
+                                isFavorite,
+                                isInAgenda,
                                 notifications,
                                 unreadNotificationsCount,
                                 events,

@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/reactjs.jsx to edit this template
  */
 import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Logo from '../common/Logo';
 import { useAuth } from '../../context/AuthContext';
 import { useApp } from '../../context/AppContext';
 
 export default function Drawer() {
+    const navigate = useNavigate();
     const {isDrawerOpen, setIsDrawerOpen} = useApp();
     const {user, isAdmin, logout} = useAuth();
     const [devNotice, setDevNotice] = useState(null);
@@ -55,16 +56,13 @@ export default function Drawer() {
                 className="fixed inset-0 bg-black/60 z-[100] transition-opacity animate-fadeIn"
                 />
             
-            <aside className="fixed top-0 left-0 h-full max-h-[100dvh] w-[290px] max-w-[80vw] bg-cremlg shadow-2xl z-
-                   [100] flex flex-col border-r border-darkgr-40 animate-slideRight">
-                <div className="p-4 flex items-center justify-between border-b border-darkgr-30 h-16 bg-lightsecn flex-
-                     shrink-0">
+        <aside className="fixed top-0 left-0 h-full max-h-[100dvh] w-[290px] max-w-[80vw] bg-cremlg shadow-2xl z-[110] flex flex-col border-r border-darkgr-40 animate-slideRight">
+                <div className="p-4 flex items-center justify-between border-b border-darkgr-30 h-16 bg-lightsecn flex-shrink-0">
                     <Logo size="sm" showText={true} titleText="CulturaTech Bogotá" />
                     <button
                         onClick={closeDrawer}
                         aria-label="Cerrar menú"
-                        className="p-2 rounded-full txt-primary hover-bg-subtle transition-colors cursor-pointer"
-                        >
+                        className="p-2 rounded-full txt-primary hover-bg-subtle transition-colors cursor-pointer">
                         <span className="material-symbols-outlined">close</span>
                     </button>
                 </div>
@@ -138,10 +136,11 @@ export default function Drawer() {
                     {user && (
                             <div className="pt-4 mt-2">
                                 <button
-                                    onClick={() => {
-                                                    logout();
-                                                    closeDrawer();
-                                                }}
+                                    onClick={async () => {
+                                        await logout();
+                                        closeDrawer();
+                                        navigate('/login', {replace: true});
+                                    }}
                                     className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full border br-danger
                                     text-danger hover:bg-red-50 transition-colors font-medium cursor-pointer"
                                     >

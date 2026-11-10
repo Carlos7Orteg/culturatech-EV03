@@ -1,0 +1,380 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 29 oct 2026, 8:32:46 p.m.
+    Author     : Carlos
+*/
+
+/* Catálogo de eventos - estilos adaptados del diseño original CulturaTech */
+
+.ct-main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 40px 64px;
+}
+
+.ct-events {
+    scroll-margin-top: 82px;
+}
+
+.ct-events-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 17px;
+}
+
+.ct-events-heading h2 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    color: #142638;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -.4px;
+    margin: 0;
+}
+
+.ct-events-heading p {
+    font-size: 12px;
+    color: #74777d;
+    margin: 6px 0 0;
+}
+
+.ct-inline-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: min(100%, 340px);
+    height: 44px;
+    border: 1px solid #d5d7d1;
+    border-radius: 8px;
+    background: white;
+    padding: 0 12px;
+    color: #74777d;
+}
+
+.ct-inline-search > .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.ct-inline-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #142638;
+    font: inherit;
+    font-size: 13px;
+}
+
+.ct-inline-search button {
+    border: 0;
+    background: transparent;
+    color: #74777d;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.ct-active-filter {
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 13px;
+    color: #74777d;
+    font-size: 11px;
+}
+
+.ct-active-filter > span {
+    margin-left: auto;
+}
+
+.ct-active-filter button {
+    border: 1px solid #d8d9d2;
+    border-radius: 20px;
+    background: #fff;
+    padding: 5px 9px;
+    color: #142638;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.ct-active-filter button span {
+    padding-left: 6px;
+}
+
+.ct-event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.ct-event-card {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e5e5df;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 3px 10px #14263807;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.ct-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px #14263812;
+}
+
+.ct-card-image-wrap {
+    height: 205px;
+    position: relative;
+    background: #e9e9e1;
+    overflow: hidden;
+}
+
+.ct-card-image-wrap > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+}
+
+.ct-event-card:hover .ct-card-image-wrap > img {
+    transform: scale(1.035);
+}
+
+.ct-card-category {
+    position: absolute;
+    left: 13px;
+    bottom: 13px;
+    padding: 5px 10px;
+    border: 1px solid #ffffff30;
+    border-radius: 20px;
+    background: #122438d9;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    backdrop-filter: blur(5px);
+}
+
+.ct-card-fav {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 37px;
+    height: 37px;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffffdf;
+    color: #74777d;
+    box-shadow: 0 3px 9px #0002;
+    cursor: pointer;
+}
+
+.ct-card-fav .material-symbols-outlined {
+    font-size: 21px;
+}
+
+.ct-card-fav.is-favorite {
+    color: #ba1a1a;
+}
+
+.ct-card-body {
+    padding: 18px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.ct-card-body h3 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 18px;
+    line-height: 1.25;
+    color: #142638;
+    font-weight: 800;
+    margin: 0 0 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ct-card-description {
+    font-size: 12px;
+    color: #5e6267;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ct-card-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 9px;
+    color: #555c62;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.ct-card-meta .material-symbols-outlined {
+    font-size: 16px;
+    color: #d97724;
+    flex-shrink: 0;
+}
+
+.ct-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid #eeeeea;
+    padding-top: 14px;
+    margin-top: auto;
+}
+
+.ct-card-bottom strong {
+    font-size: 12px;
+    color: #142638;
+}
+
+.ct-card-bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #004b74;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.ct-card-bottom a .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.ct-message {
+    padding: 22px;
+    border: 1px solid #dedfd8;
+    border-radius: 10px;
+    background: #fff;
+    color: #555c62;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 900px) {
+    .ct-main {
+        padding: 24px 24px 50px;
+    }
+
+    .ct-event-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .ct-main {
+        padding: 17px 14px 40px;
+    }
+
+    .ct-events-heading {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .ct-inline-search {
+        width: 100%;
+        height: 42px;
+    }
+
+    .ct-event-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .ct-event-card {
+        display: grid;
+        grid-template-columns: 39% minmax(0, 1fr);
+        min-height: 178px;
+    }
+
+    .ct-card-image-wrap {
+        height: 100%;
+        min-height: 178px;
+    }
+
+    .ct-card-body {
+        padding: 13px 12px;
+    }
+
+    .ct-card-body h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .ct-card-description {
+        display: none;
+    }
+
+    .ct-card-meta {
+        font-size: 10px;
+        gap: 5px;
+        margin-bottom: 7px;
+    }
+
+    .ct-card-meta .material-symbols-outlined {
+        font-size: 14px;
+    }
+
+    .ct-card-category {
+        left: 7px;
+        bottom: 8px;
+        font-size: 9px;
+        padding: 4px 7px;
+        max-width: calc(100% - 14px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ct-card-fav {
+        width: 30px;
+        height: 30px;
+        right: 7px;
+        top: 7px;
+    }
+
+    .ct-card-fav .material-symbols-outlined {
+        font-size: 18px;
+    }
+
+    .ct-card-bottom {
+        padding-top: 9px;
+        gap: 4px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ct-card-bottom strong,
+    .ct-card-bottom a {
+        font-size: 10px;
+    }
+
+    .ct-active-filter > span {
+        margin-left: 0;
+    }
+}
+
+

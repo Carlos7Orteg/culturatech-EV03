@@ -12,5 +12,3 @@ export const eventsService = {
   update: (id, evento) => apiClient.put(`/eventos/${id}`, evento),
   delete: (id) => apiClient.delete(`/eventos/${id}`)
 };
-
-
